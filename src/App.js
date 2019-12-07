@@ -11,8 +11,20 @@ import {Login, Home} from "./screens";
 import "./App.css";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import {currentService, locationCitiesCategoriesService, login, usersService} from "./services/feathers";
+import {app} from "./services/feathers/conf";
+
 
 function App() {
+
+  login('s@s.s','333333').then(async (el)=>{
+      console.log(localStorage)
+      currentService.find()
+  })
+
+
+
+
   return (
     <Provider store={store}>
         <Router>
