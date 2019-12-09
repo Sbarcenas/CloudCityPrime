@@ -1,4 +1,4 @@
-import {GET_USERS} from "./types";
+import { GET_USERS } from "./types";
 
 export const GET_USER = () => {
   return {

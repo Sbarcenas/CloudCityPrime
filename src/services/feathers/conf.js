@@ -7,28 +7,26 @@ import feathersRest from "@feathersjs/rest-client";
 const URL = "wss://api.cityprime.club";
 export const socket = io(URL, {
   //forceNew: true
-    transports:['websocket']
+  transports: ["websocket"]
 });
 
 export const app = feathers();
-// export const rest = feathers();
+export const rest = feathers();
 
 app.configure(socketio(socket));
 app.configure(
   auth({
     storage: localStorage,
     jwtStrategy: "jwt",
-      storageKey:"feathers-jwt",
-
+    storageKey: "feathers-jwt"
   })
 );
 
 app.timeout = 10000;
-/*
+
 rest.configure(feathersRest(URL).fetch(fetch));
 rest.configure(
   auth({
     storage: localStorage
   })
 );
-*/

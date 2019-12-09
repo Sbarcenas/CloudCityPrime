@@ -12,6 +12,7 @@ export const REGISTER_SUCCESS = "city.registerSuccess";
 export const REGISTER_FAILED = "city.registerFailed";
 // BENEFITS
 export const GET_BENEFITS = "city.getBenefits";
+export const BENEFITS_LOADING = "city.benefitsLoading";
+export const ADD_BENEFITS = "city.";
+// USERS
 export const GET_USERS = "city.getUsers";
-
-

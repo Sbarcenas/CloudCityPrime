@@ -10,7 +10,7 @@ import {
 } from "../actions/types";
 
 const INITIAL_STATE = {
-  token: localStorage.getItem("token"),
+  token: localStorage.getItem("feathers-jwt"),
   isAuthenticated: null,
   isLoading: false,
   user: null
@@ -28,24 +28,26 @@ export default function(state = INITIAL_STATE, { payload, type }) {
         user: payload
       };
     case LOGIN_SUCCESS:
-      case REGISTER_SUCCESS:
-        return {
-            ...state,
-            ...payload,
-            isAuthenticated: true,
-            isLoading: false,
-        }
+    case REGISTER_SUCCESS:
+        //localStorage.setItem("accessToken", payload.token);
+      return {
+        ...state,
+        ...payload,
+        isAuthenticated: true,
+        isLoading: false
+      };
     case LOGIN_FAIL:
     case LOGOUT_SUCCESS:
     case REGISTER_FAILED:
-      case AUTH_ERROR:
-        return {
-            ...state,
-            token: null,
-            user: null,
-            isAuthenticated: false,
-            isLoading: false,
-        }
+    case AUTH_ERROR:
+      localStorage.removeItem("feathers-jwt");
+      return {
+        ...state,
+        token: null,
+        user: null,
+        isAuthenticated: false,
+        isLoading: false
+      };
     default:
       return state;
   }
