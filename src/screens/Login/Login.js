@@ -11,7 +11,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {Link} from 'react-router-dom';
+import {Link} from "@material-ui/core";
+import {Link as NavLink} from "react-router-dom";
 
 function Copyright() {
     return (
@@ -93,13 +94,13 @@ export default function SignIn() {
                         color="primary"
                         className={classes.submit}
                     >
-                        <Link to={'/Home'}>Sign In</Link>
+                        <Link to='/Home'>Sign In</Link>
                     </Button>
                     <Grid container>
                         <Grid item xs>
-                            <Link href="#" variant="body2">
+                            <NavLink to="/home" variant="body2">
                                 Forgot password?
-                            </Link>
+                            </NavLink>
                         </Grid>
                         <Grid item>
                             <Link href="#" variant="body2">

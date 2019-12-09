@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+import Main from "../../layouts/Main";
+import {Table} from "../../Components/shared";
 
 function Copyright() {
     return (
@@ -43,7 +45,9 @@ const useStyles = makeStyles(theme => ({
         paddingBottom: theme.spacing(8),
     },
     card: {
-        height: '100%',
+        overflow:'scroll',
+        height: 300,
+        overflowX:'hidden',
         display: 'flex',
         flexDirection: 'column',
     },
@@ -65,7 +69,7 @@ export default function Album() {
     const classes = useStyles();
 
     return (
-        <React.Fragment>
+        <Main>
             <CssBaseline />
             <AppBar position="relative">
                 <Toolbar>
@@ -105,34 +109,20 @@ export default function Album() {
                 </div>
                 <Container className={classes.cardGrid} maxWidth="md">
                     {/* End hero unit */}
-                    <Grid container spacing={4}>
-                        {cards.map(card => (
-                            <Grid item key={card} xs={12} sm={6} md={4}>
+                    <Grid container spacing={3}>
+
+                            <Grid item xs={12} sm={6} md={6}>
                                 <Card className={classes.card}>
-                                    <CardMedia
-                                        className={classes.cardMedia}
-                                        image="https://source.unsplash.com/random"
-                                        title="Image title"
-                                    />
-                                    <CardContent className={classes.cardContent}>
-                                        <Typography gutterBottom variant="h5" component="h2">
-                                            Heading
-                                        </Typography>
-                                        <Typography>
-                                            This is a media card. You can use this section to describe the content.
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions>
-                                        <Button size="small" color="primary">
-                                            View
-                                        </Button>
-                                        <Button size="small" color="primary">
-                                            Edit
-                                        </Button>
-                                    </CardActions>
+                                   <Table />
                                 </Card>
                             </Grid>
-                        ))}
+                        <Grid item xs={12} sm={6} md={6}>
+                            <Card className={classes.card}>
+                                <Table />
+                            </Card>
+                        </Grid>
+
+
                     </Grid>
                 </Container>
             </main>
@@ -147,6 +137,6 @@ export default function Album() {
                 <Copyright />
             </footer>
             {/* End footer */}
-        </React.Fragment>
+        </Main>
     );
 }
