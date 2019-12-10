@@ -4,17 +4,17 @@ import auth from "@feathersjs/authentication-client";
 import socketio from "@feathersjs/socketio-client";
 import feathersRest from "@feathersjs/rest-client";
 
-const URL = "wss://api.cityprime.club";
+const URL = "https://api.cityprime.club";
 export const socket = io(URL, {
   //forceNew: true
   transports: ["websocket"]
 });
 
-export const app = feathers();
+//export const app = feathers();
 export const rest = feathers();
 
-app.configure(socketio(socket));
-app.configure(
+//app.configure(socketio(socket));
+rest.configure(
   auth({
     storage: localStorage,
     jwtStrategy: "jwt",
@@ -22,11 +22,11 @@ app.configure(
   })
 );
 
-app.timeout = 10000;
+//rest.timeout = 10000;
 
 rest.configure(feathersRest(URL).fetch(fetch));
-rest.configure(
+/*rest.configure(
   auth({
     storage: localStorage
   })
-);
+);*/

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
@@ -13,14 +13,24 @@ import { Table } from "../../components/shared";
 import TextField from "@material-ui/core/TextField";
 import { LOGO_IMG } from "../../assets/images";
 import { connect } from "react-redux";
-import { GET_BENEFIT } from "../../redux/actions/benefitAction";
+import { ADD_BENEFIT, GET_BENEFIT } from "../../redux/actions/benefitAction";
 import { colors } from "../../utils/theme";
+import { claimBenefitService, readUserService } from "../../services/feathers";
+import { GET_USER } from "../../redux/actions/userActions";
+import UserList from "../../components/shared/UserList";
+import Modal from "../../components/shared/Modal";
+import { LOGOUT } from "../../redux/actions/authActions";
+import { ADD_USER } from "../../redux/actions/userActions";
 
-export function Copyright({textColor}) {
+export function Copyright({ textColor }) {
   return (
-    <Typography variant="body2" style={{color:textColor}}  align="center">
+    <Typography variant="body2" style={{ color: textColor }} align="center">
       {"Copyright © "}
-      <Link color={textColor} style={{color:textColor}} href="https://material-ui.com/">
+      <Link
+        color={textColor}
+        style={{ color: textColor }}
+        href="https://material-ui.com/"
+      >
         E-me digital agency
       </Link>{" "}
       {new Date().getFullYear()}
@@ -75,6 +85,16 @@ const useStyles = makeStyles(theme => ({
   },
   textButton: {
     color: colors.white
+  },
+  title: {
+    fontWeight: "bold",
+    marginBottom: -3,
+    backgroundColor: colors.white,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    display: "inline-block",
+    padding: 10,
+    boxShadow: "2px 3px 5px 0px rgba(0,0,0,0.75)"
   }
 }));
 
@@ -83,7 +103,25 @@ const Home = props => {
 
   useEffect(() => {
     props.getBenefits();
-  });
+    props.getUsers();
+  }, []);
+  const [input, setInput] = useState({});
+
+  const handleInputChange = e =>
+    setInput({
+      ...input,
+      [e.currentTarget.name]: e.currentTarget.value
+    });
+
+  const onSubmit = async e => {
+    e.preventDefault();
+    const { code } = input;
+    const token = code.toUpperCase();
+    console.log(token);
+    //const res = await claimBenefitService.create({ token });
+    props.addUser(code);
+    // Attemp to login new user
+  };
 
   return (
     <Main>
@@ -96,23 +134,25 @@ const Home = props => {
             justifyContent: "center"
           }}
         >
-          <img className={classes.imageContainer} src={LOGO_IMG} alt={'Alt'}/>
+          <img className={classes.imageContainer} src={LOGO_IMG} alt={"Alt"} />
         </div>
+        <div onClick={() => props.logOut()}>Logout</div>
       </AppBar>
       <main>
         {/* Hero unit */}
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <div>
-              <form className={classes.form} noValidate>
+              <form onSubmit={onSubmit} className={classes.form} noValidate>
                 <TextField
+                  onChange={handleInputChange}
                   variant="outlined"
                   margin="normal"
                   required
                   fullWidth
-                  id="codigo"
+                  id="code"
                   label="Código"
-                  name="email"
+                  name="code"
                   autoComplete="benefit"
                   autoFocus
                 />
@@ -133,13 +173,15 @@ const Home = props => {
           {/* End hero unit */}
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6} md={6}>
+              <div className={classes.title}>Beneficios</div>
               <Card className={classes.card}>
                 <Table items={props.benefits.benefits} />
               </Card>
             </Grid>
             <Grid item xs={12} sm={6} md={6}>
+              <div className={classes.title}>Usuarios</div>
               <Card className={classes.card}>
-                <Table items={props.benefits.benefits} />
+                <UserList items={props.user.users} />
               </Card>
             </Grid>
           </Grid>
@@ -160,21 +202,26 @@ const Home = props => {
         </Typography>
         <Copyright />
       </footer>
-      {/* End footer */}
+      <Modal />
     </Main>
   );
 };
 
 function mapStateToProps(state) {
-  const { benefit } = state;
+  const { benefit, user } = state;
   return {
-    benefits: benefit
+    benefits: benefit,
+    user: user
   };
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getBenefits: () => dispatch(GET_BENEFIT())
+    getBenefits: () => dispatch(GET_BENEFIT()),
+    getUsers: () => dispatch(GET_USER()),
+    logOut: () => dispatch(LOGOUT()),
+    addUser: token => dispatch(ADD_USER(token)),
+    addBenefit: token => dispatch(ADD_BENEFIT(token))
   };
 };
 

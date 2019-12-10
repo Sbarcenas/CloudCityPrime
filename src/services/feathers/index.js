@@ -1,10 +1,6 @@
-import { app, rest } from "./conf";
+import { rest as app } from "./conf";
 
-/*export const login = async (email, password) => {
-  //await localStorage.setItem("username", email);
-  //await localStorage.setItem("password", password);
-  return app.authenticate({ strategy: "local", email, password });
-};*/
+
 
 export const logout = async () => {
   await app.logout();

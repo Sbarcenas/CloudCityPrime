@@ -1,8 +1,5 @@
 import React from "react";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import { makeStyles } from "@material-ui/core";
-import CameraIcon from "@material-ui/icons/PhotoCamera";
+import { ListItemAvatar, makeStyles, Avatar } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -30,15 +27,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function ScanCard({ client, benefit, reader, date }) {
+function ScanCard({ image, client, benefit, reader, date, onClick }) {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div onClick={onClick} className={classes.root}>
       <div className={classes.cardRoot}>
         <ListItemAvatar>
           <Avatar>
-            <CameraIcon />
+            <img style={{widt:40, height:40}} src={image} alt={'No image'}/>
           </Avatar>
         </ListItemAvatar>
         <div>

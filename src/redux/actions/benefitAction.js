@@ -1,35 +1,37 @@
-import {ADD_BENEFITS, BENEFITS_LOADING, GET_BENEFITS} from "./types";
+import { ADD_BENEFITS, BENEFITS_LOADING, GET_BENEFITS } from "./types";
+import {claimBenefitService, readUserService, usersBenefitsService} from "../../services/feathers";
+import { returnErrors } from "./errorActions";
 
-export const GET_BENEFIT = () => dispatch => {
-  /*
-    dispatch(SET_ITEMS_LOADING());
-    axios.get('/api/benefits').then(res =>
-    dispatch({
-    type:GET_BENEFITS,
-    payload: res.data})
-    )
-    */
-  return {
-    type: GET_BENEFITS
-  };
+export const GET_BENEFIT = () => async dispatch => {
+  dispatch(SET_ITEMS_LOADING());
+  usersBenefitsService
+    .find({
+      query: {
+        $limit: 50,
+        status: "Reclaimed",
+        $sort: { date_redeem: -1 },
+        $client: { join_users: "true" }
+      }
+    })
+    .then(data => {
+      dispatch({
+        type: GET_BENEFITS,
+        payload: data.data
+      });
+    })
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
 };
 
 export const SET_ITEMS_LOADING = () => {
-
   return {
     type: BENEFITS_LOADING
   };
 };
 
-export const ADD_BENEFIT = item => dispatch =>  {
-
-    /* axios.post('/api/benefits', item).then(res => // Inserto item en BD y cuando regrese el registro que inserto
- * dispatch({ // Se realiza el dispatch o de
- *  *   type: ADD_BENEFITS,<-
- *      payload: res.data <-
- * }) */
-    return {
-        type: ADD_BENEFITS,
-        payload: item
-    }
-}
+export const ADD_BENEFIT = rawToken => async dispatch => {
+  const token = rawToken.toUpperCase();
+  await claimBenefitService.create({ token });
+  dispatch(GET_BENEFIT());
+};

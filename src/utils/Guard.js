@@ -1,21 +1,43 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { LOGIN_VER } from "../redux/actions/authActions";
-import { useLocation, useRouteMatch, Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { CircularProgress } from "@material-ui/core";
 
 function Guard(props) {
-  const locations = useLocation();
-  useEffect(() => {
-    props.loginVerify();
-    alert(props.isAuthenticated);
-  });
+  let history = useHistory();
 
-  return (locations !== '/login' && !props.isAuthenticated) && <div>{props.children}</div>;
+  useEffect(() => {
+    props
+      .loginVerify()
+      .then(() =>
+        props.isAuthenticated ? history.push("/home") : history.push("/login")
+      );
+  }, [props.isAuthenticated]);
+
+  if (props.isLoading) {
+    return (
+      <div
+        style={{
+          height: "100vh",
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
+  } else {
+    return <div>{props.children}</div>;
+  }
 }
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  error: state.error
+  error: state.error,
+  isLoading: state.auth.isLoading
 });
 
 const mapDispatchToProps = dispatch => {

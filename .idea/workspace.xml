@@ -2,25 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33b8a1ab-f264-4dfd-8223-6800bf786dec" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Components/shared/cards/scanCard.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/actions/authActions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/actions/errorActions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/Guard.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/theme.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/shared/Modal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/shared/UserList.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/shared/cards/UserCard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/shared/Table.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/shared/Table.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/shared/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/shared/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/Main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/shared/cards/scanCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/shared/cards/scanCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/actions/authActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/authActions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/actions/benefitAction.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/benefitAction.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/types.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/actions/userActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/userActions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/reducers/authReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers/authReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/reducers/benefitReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers/benefitReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/reducers/userReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers/userReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Home/Home.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/Login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Login/Login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/feathers/conf.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/feathers/conf.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/feathers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/feathers/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/Guard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Guard.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +87,8 @@
       <updated>1575726952735</updated>
       <workItem from="1575726956882" duration="14973000" />
       <workItem from="1575755983236" duration="13707000" />
-      <workItem from="1575897709060" duration="25617000" />
+      <workItem from="1575897709060" duration="25704000" />
+      <workItem from="1575984209259" duration="24405000" />
     </task>
     <servers />
   </component>

@@ -8,6 +8,7 @@ import Container from "@material-ui/core/Container";
 import { colors } from "../../utils/theme";
 import { connect } from "react-redux";
 import { LOGIN } from "../../redux/actions/authActions";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -40,6 +41,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function SignIn(props) {
+  let history = useHistory();
+
+  function handleClick() {
+    history.push("/home");
+  }
+
   const [input, setInput] = useState({});
   const [msg, setMsg] = useState(null);
 
@@ -57,7 +64,13 @@ function SignIn(props) {
       password: password
     };
     // Attemp to login new user
-    props.login(user);
+    try {
+      props
+        .login(user)
+        .then(e => (e.type !== "city.loginFail" ? handleClick() : null));
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const classes = useStyles();
@@ -140,7 +153,7 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
   return {
-    login: (user) => dispatch(LOGIN(user))
+    login: user => dispatch(LOGIN(user))
   };
 }
 

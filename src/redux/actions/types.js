@@ -16,3 +16,4 @@ export const BENEFITS_LOADING = "city.benefitsLoading";
 export const ADD_BENEFITS = "city.";
 // USERS
 export const GET_USERS = "city.getUsers";
+export const ADD_USER = "city.addUser";

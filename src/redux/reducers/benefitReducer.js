@@ -3,18 +3,7 @@ import { ADD_BENEFITS, BENEFITS_LOADING, GET_BENEFITS } from "../actions/types";
 const INITIAL_STATE = {
   loading: false,
   benefits: [
-    {
-      name: "Sebastian Barcenas",
-      read_for: "Daniel Vengoechea",
-      client: "Ezequien Bahoque",
-      date: Date.now()
-    },
-    {
-      name: "Sebastian Barcenas",
-      read_for: "Daniel Vengoechea",
-      client: "Ezequien Bahoque",
-      date: Date.now()
-    }
+
   ]
 };
 

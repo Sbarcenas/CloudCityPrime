@@ -41,8 +41,11 @@ export default function(state = INITIAL_STATE, { payload, type }) {
     case REGISTER_FAILED:
     case AUTH_ERROR:
       localStorage.removeItem("feathers-jwt");
+      localStorage.removeItem("accessToken");
+
       return {
         ...state,
+        accessToken: null,
         token: null,
         user: null,
         isAuthenticated: false,
