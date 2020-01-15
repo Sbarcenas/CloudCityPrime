@@ -1,10 +1,14 @@
-import { ADD_BENEFITS, BENEFITS_LOADING, GET_BENEFITS } from "../actions/types";
+import {
+  ADD_BENEFITS,
+  BENEFITS_LOADING,
+  EXPORT_BENEFITS_HISTORY,
+  EXPORT_FAILED,
+  GET_BENEFITS
+} from "../actions/types";
 
 const INITIAL_STATE = {
   loading: false,
-  benefits: [
-
-  ]
+  benefits: []
 };
 
 export default function(state = INITIAL_STATE, { type, payload }) {
@@ -24,8 +28,12 @@ export default function(state = INITIAL_STATE, { type, payload }) {
       return {
         ...state,
         benefits: [...state.benefits, payload],
-        loading: false,
+        loading: false
       };
+    case EXPORT_BENEFITS_HISTORY:
+      return { ...state, loading: false };
+    case EXPORT_FAILED:
+      return { ...state, loading: false };
     default:
       return state;
   }

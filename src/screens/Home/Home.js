@@ -13,14 +13,18 @@ import { Table } from "../../components/shared";
 import TextField from "@material-ui/core/TextField";
 import { LOGO_IMG } from "../../assets/images";
 import { connect } from "react-redux";
-import { ADD_BENEFIT, GET_BENEFIT } from "../../redux/actions/benefitAction";
+import {
+  ADD_BENEFIT,
+  EXPORT_BENEFITS_HIST,
+  GET_BENEFIT
+} from "../../redux/actions/benefitAction";
 import { colors } from "../../utils/theme";
-import { claimBenefitService, readUserService } from "../../services/feathers";
-import { GET_USER } from "../../redux/actions/userActions";
+import { EXPORT_USER_HISTORY, GET_USER } from "../../redux/actions/userActions";
 import UserList from "../../components/shared/UserList";
-import Modal from "../../components/shared/Modal";
+import { Modal } from "../../components/shared/index";
 import { LOGOUT } from "../../redux/actions/authActions";
 import { ADD_USER } from "../../redux/actions/userActions";
+import { downloadLink } from "../../utils/helpers";
 
 export function Copyright({ textColor }) {
   return (
@@ -34,7 +38,6 @@ export function Copyright({ textColor }) {
         E-me digital agency
       </Link>{" "}
       {new Date().getFullYear()}
-      {"."}
     </Typography>
   );
 }
@@ -95,6 +98,32 @@ const useStyles = makeStyles(theme => ({
     display: "inline-block",
     padding: 10,
     boxShadow: "2px 3px 5px 0px rgba(0,0,0,0.75)"
+  },
+  buttonTitle: {
+    color: "white",
+    fontWeight: "bold",
+    marginBottom: -3,
+    background: colors.main,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    display: "inline-block",
+    padding: 10,
+    boxShadow: "2px 3px 5px 0px rgba(0,0,0,0.75)",
+    cursor: "pointer",
+    "&:active": {
+      boxShadow: "0px 0px 0px 0px rgba(0,0,0,0.75)"
+    }
+  },
+  buttons: {
+    display: "flex"
+  },
+  button: {
+    marginRight: 3,
+    marginLeft: 3,
+    background: colors.main
+  },
+  logout: {
+    cursor: "pointer"
   }
 }));
 
@@ -116,11 +145,16 @@ const Home = props => {
   const onSubmit = async e => {
     e.preventDefault();
     const { code } = input;
-    const token = code.toUpperCase();
-    console.log(token);
+    await props.addBenefit(code);
+
     //const res = await claimBenefitService.create({ token });
-    props.addUser(code);
-    // Attemp to login new user
+  };
+
+  const handleAlternate = async e => {
+    e.preventDefault();
+    const { code } = input;
+
+    await props.addUser(code);
   };
 
   return (
@@ -136,7 +170,9 @@ const Home = props => {
         >
           <img className={classes.imageContainer} src={LOGO_IMG} alt={"Alt"} />
         </div>
-        <div onClick={() => props.logOut()}>Logout</div>
+        <div onClick={() => props.logOut()} className={classes.logout}>
+          Logout
+        </div>
       </AppBar>
       <main>
         {/* Hero unit */}
@@ -156,15 +192,28 @@ const Home = props => {
                   autoComplete="benefit"
                   autoFocus
                 />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className={classes.backPrime}
-                >
-                  Canjear beneficio
-                </Button>
+                <div className={classes.buttons}>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    value="benefit"
+                    type="submit"
+                  >
+                    Canjear beneficio
+                  </Button>
+                  <Button
+                    onClick={handleAlternate}
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    value="user"
+                  >
+                    Escanear usuario
+                  </Button>
+                </div>
               </form>
             </div>
           </Container>
@@ -173,13 +222,34 @@ const Home = props => {
           {/* End hero unit */}
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6} md={6}>
-              <div className={classes.title}>Beneficios</div>
+              <div className={classes.title}>Beneficios (Últimos 50)</div>
+              <div
+                onClick={() =>
+                  props.exportBenefits().then(res => {
+                    downloadLink(res);
+                  })
+                }
+                className={classes.buttonTitle}
+              >
+                Exportar
+              </div>
               <Card className={classes.card}>
                 <Table items={props.benefits.benefits} />
               </Card>
             </Grid>
             <Grid item xs={12} sm={6} md={6}>
-              <div className={classes.title}>Usuarios</div>
+              <div className={classes.title}>Usuarios (Últimos 50)</div>
+              <div
+                onClick={() =>
+                  props.exportUsers().then(res => {
+                    downloadLink(res);
+                  })
+                }
+                className={classes.buttonTitle}
+              >
+                Exportar
+              </div>
+
               <Card className={classes.card}>
                 <UserList items={props.user.users} />
               </Card>
@@ -221,7 +291,9 @@ const mapDispatchToProps = dispatch => {
     getUsers: () => dispatch(GET_USER()),
     logOut: () => dispatch(LOGOUT()),
     addUser: token => dispatch(ADD_USER(token)),
-    addBenefit: token => dispatch(ADD_BENEFIT(token))
+    addBenefit: token => dispatch(ADD_BENEFIT(token)),
+    exportUsers: () => dispatch(EXPORT_USER_HISTORY()),
+    exportBenefits: () => dispatch(EXPORT_BENEFITS_HIST())
   };
 };
 

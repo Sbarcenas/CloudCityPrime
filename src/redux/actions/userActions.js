@@ -1,14 +1,22 @@
-import { ADD_BENEFITS, GET_USERS, USER_LOADING } from "./types";
+import {
+  EXPORT_FAILED,
+  EXPORT_USERS_HISTORY,
+  GET_USERS,
+  MESSAGE,
+  USER_LOADING
+} from "./types";
 import {
   readUserService,
-  readUserTokenHistoryService
+  readUserTokenHistoryService,
+  userHistory
 } from "../../services/feathers";
-import { returnErrors } from "./errorActions";
+import { clearErrors, returnErrors } from "./errorActions";
+import { CLEAR_MESSAGE } from "./messageActions";
 
 export const GET_USER = () => dispatch => {
   readUserTokenHistoryService
     .find({
-      query: { $limit: 1000, $sort: { id: -1 } }
+      query: { $limit: 50, $sort: { id: -1 } }
     })
     .then(({ data }) => {
       dispatch({
@@ -28,7 +36,43 @@ export const SET_USERS_LOADING = () => {
 };
 
 export const ADD_USER = rawToken => async dispatch => {
-  const token = rawToken.toUpperCase();
-   await readUserService.create({ token });
-   dispatch(GET_USER()); // To fuck Leo
+  dispatch(SET_USERS_LOADING());
+  dispatch(clearErrors());
+  dispatch(CLEAR_MESSAGE());
+  let token;
+  if (rawToken) {
+    token = rawToken.toUpperCase();
+  }
+  readUserService
+    .create({ token })
+    .then(() => {
+      dispatch({
+        type: MESSAGE,
+        payload: "Usuario escaneado con exito"
+      });
+      dispatch(GET_USER());
+    })
+    .catch(e => {
+      dispatch(returnErrors(e.message, e.status, null));
+    });
+};
+
+export const EXPORT_USER_HISTORY = () => dispatch => {
+  dispatch({
+    type: USER_LOADING
+  });
+
+  return userHistory
+    .create({})
+    .then(res => {
+      dispatch({
+        type: EXPORT_USERS_HISTORY
+      });
+      return res;
+    })
+    .catch(e => {
+      dispatch({
+        type: EXPORT_FAILED
+      });
+    });
 };

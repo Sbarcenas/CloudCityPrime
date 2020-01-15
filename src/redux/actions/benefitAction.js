@@ -1,9 +1,22 @@
-import { ADD_BENEFITS, BENEFITS_LOADING, GET_BENEFITS } from "./types";
-import {claimBenefitService, readUserService, usersBenefitsService} from "../../services/feathers";
-import { returnErrors } from "./errorActions";
+import {
+  ADD_BENEFITS,
+  BENEFITS_LOADING,
+  EXPORT_BENEFITS_HISTORY,
+  EXPORT_FAILED,
+  GET_BENEFITS,
+  MESSAGE,
+  USER_LOADING
+} from "./types";
+import {
+  benefitHistory,
+  claimBenefitService,
+  readUserService,
+  usersBenefitsService
+} from "../../services/feathers";
+import { clearErrors, returnErrors } from "./errorActions";
+import { CLEAR_MESSAGE } from "./messageActions";
 
 export const GET_BENEFIT = () => async dispatch => {
-  dispatch(SET_ITEMS_LOADING());
   usersBenefitsService
     .find({
       query: {
@@ -19,9 +32,7 @@ export const GET_BENEFIT = () => async dispatch => {
         payload: data.data
       });
     })
-    .catch(err =>
-      dispatch(returnErrors(err.response.data, err.response.status))
-    );
+    .catch(err => dispatch(returnErrors(err.message, err.status)));
 };
 
 export const SET_ITEMS_LOADING = () => {
@@ -31,7 +42,43 @@ export const SET_ITEMS_LOADING = () => {
 };
 
 export const ADD_BENEFIT = rawToken => async dispatch => {
-  const token = rawToken.toUpperCase();
-  await claimBenefitService.create({ token });
-  dispatch(GET_BENEFIT());
+  dispatch(SET_ITEMS_LOADING());
+  dispatch(clearErrors());
+  dispatch(CLEAR_MESSAGE());
+  let token;
+  if (rawToken) {
+    token = rawToken.toUpperCase();
+  }
+  claimBenefitService
+    .create({ token })
+    .then(() => {
+      dispatch({
+        type: MESSAGE,
+        payload: "Beneficio escaneado con exito"
+      });
+      dispatch(GET_BENEFIT());
+    })
+    .catch(e => {
+      dispatch(returnErrors(e.message, e.status, null));
+    });
+};
+
+export const EXPORT_BENEFITS_HIST = () => dispatch => {
+  dispatch({
+    type: BENEFITS_LOADING
+  });
+
+  return benefitHistory
+    .create({})
+    .then(res => {
+      dispatch({
+        type: EXPORT_BENEFITS_HISTORY
+      });
+      return res;
+    })
+    .catch(e => {
+      dispatch({
+        type: EXPORT_FAILED
+      });
+    });
 };

@@ -3,6 +3,10 @@ import { connect } from "react-redux";
 import { LOGIN_VER } from "../redux/actions/authActions";
 import { useHistory } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core";
+import { colors } from "./theme";
+import AlertCard from "../components/shared/cards/AlertCard";
+import { clearErrors } from "../redux/actions/errorActions";
+import { CLEAR_MESSAGE } from "../redux/actions/messageActions";
 
 function Guard(props) {
   let history = useHistory();
@@ -10,9 +14,12 @@ function Guard(props) {
   useEffect(() => {
     props
       .loginVerify()
-      .then(() =>
-        props.isAuthenticated ? history.push("/home") : history.push("/login")
-      );
+      .then(() => {
+        props.isAuthenticated ? history.push("/home") : history.push("/login");
+      })
+      .catch(e => {
+        console.log("Login Failed", e);
+      });
   }, [props.isAuthenticated]);
 
   if (props.isLoading) {
@@ -22,26 +29,52 @@ function Guard(props) {
           height: "100vh",
           display: "flex",
           justifyContent: "center",
-          alignItems: "center"
+          alignItems: "center",
+          background: colors.main
         }}
       >
-        <CircularProgress />
+        <CircularProgress color={"secondary"} />
       </div>
     );
   } else {
-    return <div>{props.children}</div>;
+    const handleClose = () => {
+      props.clearError();
+      props.clearMessage();
+    };
+    return (
+      <div>
+        {props.error.msg && (
+          <AlertCard
+            variant="error"
+            onClose={handleClose}
+            message={props.error.msg}
+          />
+        )}
+        {props.message && (
+          <AlertCard
+            variant="success"
+            onClose={handleClose}
+            message={props.message}
+          />
+        )}
+        {props.children}
+      </div>
+    );
   }
 }
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   error: state.error,
-  isLoading: state.auth.isLoading
+  isLoading: state.auth.isLoading,
+  message: state.message.msg
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    loginVerify: () => dispatch(LOGIN_VER())
+    loginVerify: () => dispatch(LOGIN_VER()),
+    clearError: () => dispatch(clearErrors()),
+    clearMessage: () => dispatch(CLEAR_MESSAGE())
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Guard);

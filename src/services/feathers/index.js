@@ -1,7 +1,5 @@
 import { rest as app } from "./conf";
 
-
-
 export const logout = async () => {
   await app.logout();
 };
@@ -9,6 +7,8 @@ export const logout = async () => {
 export const usersService = app.service("users");
 export const currentService = app.service("current");
 export const passwordRecoveryService = app.service("recovery-password");
+export const benefitHistory = app.service("download-benefits-list");
+export const userHistory = app.service("download-scanned-users");
 
 export const establishmentsService = app.service("establishments");
 export const favoriteEstablishmentsService = app.service(

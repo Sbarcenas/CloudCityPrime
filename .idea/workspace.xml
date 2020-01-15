@@ -2,7 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33b8a1ab-f264-4dfd-8223-6800bf786dec" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Components/shared/cards/AlertCard.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux/actions/messageActions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux/reducers/messageReducer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/helpers.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/shared/Modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/shared/Modal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/shared/Table.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/shared/Table.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/shared/UserList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/shared/UserList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/shared/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/shared/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/actions/authActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/authActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/actions/benefitAction.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/benefitAction.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/types.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/actions/userActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/userActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/reducers/authReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers/authReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/reducers/benefitReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers/benefitReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/reducers/errorReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers/errorReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/reducers/rootReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers/rootReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/reducers/userReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers/userReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Home/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/Login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Login/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/feathers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/feathers/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/Guard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Guard.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,7 +65,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.standard" value="" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
-    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
@@ -69,7 +102,17 @@
       <workItem from="1575726956882" duration="14973000" />
       <workItem from="1575755983236" duration="13707000" />
       <workItem from="1575897709060" duration="25704000" />
-      <workItem from="1575984209259" duration="24861000" />
+      <workItem from="1575984209259" duration="25045000" />
+      <workItem from="1576070857974" duration="15673000" />
+      <workItem from="1576098728421" duration="635000" />
+      <workItem from="1576157010502" duration="71000" />
+      <workItem from="1576189616606" duration="1901000" />
+      <workItem from="1576243218460" duration="246000" />
+      <workItem from="1576938963584" duration="1607000" />
+      <workItem from="1577198311719" duration="1745000" />
+      <workItem from="1577548430481" duration="1543000" />
+      <workItem from="1579033014732" duration="313000" />
+      <workItem from="1579105082572" duration="3886000" />
     </task>
     <servers />
   </component>

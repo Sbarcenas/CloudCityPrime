@@ -6,7 +6,8 @@ import {
   REGISTER_FAILED,
   REGISTER_SUCCESS,
   USER_LOADED,
-  USER_LOADING
+  USER_LOADING,
+  LOADING
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -18,7 +19,7 @@ const INITIAL_STATE = {
 
 export default function(state = INITIAL_STATE, { payload, type }) {
   switch (type) {
-    case USER_LOADING:
+    case LOADING:
       return { ...state, isLoading: true };
     case USER_LOADED:
       return {
@@ -29,7 +30,8 @@ export default function(state = INITIAL_STATE, { payload, type }) {
       };
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
-        //localStorage.setItem("accessToken", payload.token);
+      //localStorage.setItem("accessToken", payload.token);
+
       return {
         ...state,
         ...payload,
@@ -42,7 +44,6 @@ export default function(state = INITIAL_STATE, { payload, type }) {
     case AUTH_ERROR:
       localStorage.removeItem("feathers-jwt");
       localStorage.removeItem("accessToken");
-
       return {
         ...state,
         accessToken: null,

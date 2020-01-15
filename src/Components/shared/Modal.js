@@ -55,7 +55,6 @@ const DialogActions = withStyles(theme => ({
 
 export default function Modal({ open, handleClose, el }) {
   if (open && el && handleClose) {
-      console.log(el)
     return (
       <Dialog
         onClose={handleClose}

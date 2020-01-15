@@ -17,7 +17,6 @@ export default function UserList({ items = [] }) {
   return (
     <List className={classes.root}>
       {items.map((el, index) => {
-        console.log(el);
         return (
           <UserCard
             key={index}

@@ -3,12 +3,14 @@ import {
   errorReducer,
   authReducer,
   userReducer,
-  benefitReducer
+  benefitReducer,
+  messageReducer
 } from "./index";
 
 export default combineReducers({
   error: errorReducer,
   auth: authReducer,
   user: userReducer,
-  benefit: benefitReducer
+  benefit: benefitReducer,
+  message: messageReducer
 });

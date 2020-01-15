@@ -17,16 +17,16 @@ export default function FolderList({ items = [] }) {
   const [data, setData] = React.useState();
   const showMore = el => {
     setData(el);
-    setOpen(true);
+    setOpen(!open);
   };
-  const handleClose = () => setOpen(false);
+  //const handleClose = () => setOpen(false);
 
   const classes = useStyles();
 
   return (
     <Fragment>
       {data && open === true && (
-        <Modal open={open} el={data} handleClose={handleClose} />
+        <Modal open={open} el={data} handleClose={showMore} />
       )}
       <List className={classes.root}>
         {items.map((el, index) => (

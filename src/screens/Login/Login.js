@@ -64,13 +64,7 @@ function SignIn(props) {
       password: password
     };
     // Attemp to login new user
-    try {
-      props
-        .login(user)
-        .then(e => (e.type !== "city.loginFail" ? handleClick() : null));
-    } catch (e) {
-      console.log(e);
-    }
+    props.login(user);
   };
 
   const classes = useStyles();
